@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -7,10 +7,12 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 })
 export class CounterComponent implements OnInit, OnChanges {
   @Input() counterParent: number;
+  @Output() counterHistoryEvent = new EventEmitter<number>();
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-  console.log(changes);
+    this.counterHistoryEvent.emit(changes.counterParent.previousValue);
+    console.log(changes.counterParent.previousValue);
   }
 
   ngOnInit(): void {}

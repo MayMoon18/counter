@@ -1,7 +1,7 @@
 <h1 appBgStyle>Counter</h1>
 
 <!--Child component-->
-<app-counter *ngIf="counter > 0" [counterParent]="counter"></app-counter>
+<app-counter (counterHistoryEvent)="addHistory($event)" [counterParent]="counter"></app-counter>
 
 <button (click)="increment()">Increment</button>
 <button (click)="decrement()">Decrement</button>
@@ -10,7 +10,5 @@
 	The increment button was clicked
 </div>
 
-<h2>Book list</h2>
-<ul *ngFor="let book of bookList">
-	<div>{{ book }}</div>
-</ul>
+<h2 appBgColorStyle>Counter History</h2>
+<ul *ngFor="let previousValue of counterHistory">{{ previousValue }}</ul>
